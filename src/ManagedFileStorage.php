@@ -20,11 +20,9 @@ class ManagedFileStorage extends FileStorage implements Nette\Caching\IStorage
 
 	protected $ownership;
 
-	public function __construct($dir, $ownership = NULL) {
+	public function setCacheOwnership($ownership)
+	{
 		$this->ownership = $ownership;
-		$this->permissions = $permissions;
-
-		parent::__construct($dir);
 	}
 
 	/**
