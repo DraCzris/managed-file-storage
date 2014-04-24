@@ -4,7 +4,7 @@
  * @author Tomas Polivka <draczris@gmail.com>
  */
 
-namespace Draczris;
+namespace ManagedFileStorage;
 
 use Nette,
 	Nette\Caching\Cache,

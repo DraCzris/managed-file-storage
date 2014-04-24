@@ -1,6 +1,6 @@
 <?php
 
-namespace Draczris\ManagedFileStorage\DI;
+namespace ManagedFileStorage\DI;
 
 use Nette;
 
