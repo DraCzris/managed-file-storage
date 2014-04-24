@@ -24,11 +24,11 @@ class Extension extends Nette\DI\CompilerExtension
 
         $builder = $this->getContainerBuilder();
 
-        $builder->agetDefinition('cacheStorage') // no namespace for back compatibility
+        $builder->getDefinition('cacheStorage') // no namespace for back compatibility
             ->setClass(
-                'Draczris\ManagedFileStorage',
-                array($container->expand('%tempDir%/cache', '@cacheJournal', $config['ownership']))
-                );
+                'ManagedFileStorage\ManagedFileStorage',
+                array($container->expand('%tempDir%/cache'), '@cacheJournal', $config['ownership'])
+            );
     }
 
 }
