@@ -1,8 +1,8 @@
 {
-    "name": "DraCzris/ManagedFileStorage",
+    "name": "draczris/managed-files-torage",
     "description": "FileStorage with customizable owner and group for Nette (PHP framework).",
     "keywords": ["nette", "storage", "permissions"],
-    "homepage": "https://github.com/DraCzris/ManagedFileStorage.git",
+    "homepage": "https://github.com/DraCzris/managed-file-storage.git",
     "license": ["BSD-3-Clause"],
     "authors": [
         {
