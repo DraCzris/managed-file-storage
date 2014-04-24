@@ -8,7 +8,7 @@ namespace Draczris;
 
 use Nette,
 	Nette\Caching\Cache,
-	Nette\Caching\Storages
+	Nette\Caching\Storages;
 
 /**
  * Cache file storage with customizable owner and group
