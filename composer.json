@@ -1,5 +1,5 @@
 {
-    "name": "draczris/managed-files-torage",
+    "name": "draczris/managed-file-storage",
     "description": "FileStorage with customizable owner and group for Nette (PHP framework).",
     "keywords": ["nette", "storage", "permissions"],
     "homepage": "https://github.com/DraCzris/managed-file-storage.git",
