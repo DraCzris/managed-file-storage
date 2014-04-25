@@ -28,7 +28,7 @@ class Extension extends Nette\DI\CompilerExtension
         $builder->addDefinition('filePermissionsManager')
             ->setClass(
                 'ManagedFileStorage\FilePermissionsManager',
-                array($config['ownership'], $config['userSudo'])
+                array($config['ownership'], $config['useSudo'])
             );
 
         $builder->addDefinition('managedFileJournal')
