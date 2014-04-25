@@ -70,26 +70,16 @@ class ManagedFileStorage extends Nette\Object implements Nette\Caching\IStorage
 	public function lock($key)
 	{
 		$cacheFile = $this->getCacheFile($key);
-		if ($this->useDirs && !is_dir($dir = dirname($cacheFile))) {
-			@mkdir($dir); // @ - directory may already exist
-			$this->filePermissionsManager->fixOwnership($dir); // change ownership of cache dir
-		}
-		$handle = @fopen($cacheFile, 'r+b'); // @ - file may not exist
-		if (!$handle) {
-			$handle = fopen($cacheFile, 'wb');
 
-			if (!$handle) {
-				return;
-			}
+        if ($this->useDirs) {
+            $this->filePermissionsManager->createDirectoryIfNotExists(dirname($cacheFile));
+        }
 
-			fclose($handle);
-			$this->filePermissionsManager->fixOwnership($cacheFile); // change ownership of cache file
-			$handle = fopen($cacheFile, 'wb');
+		$handle = $this->filePermissionsManager->createFileIfNotExists($cacheFile);
 
-			if (!$handle) {
-				return;
-			}
-		}
+        if (!$handle) {
+            return;
+        }
 
 		$this->locks[$key] = $handle;
 		flock($handle, LOCK_EX);
