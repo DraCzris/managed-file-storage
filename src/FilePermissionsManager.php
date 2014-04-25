@@ -11,19 +11,37 @@ use Nette;
 
 class FilePermissionsManager extends Nette\Object
 {
-	protected $ownership;
+	protected $defaultOwnership;
 
-	public __construct($ownership)
+	protected $userSudo;
+
+	public function __construct($defaultOwnership, $useSudo)
 	{
-		$this->$ownership = $ownership;
+		$this->defaultOwnership = $defaultOwnership;
+		$this->sudo = $sudo;
 	}
 
 	public function fixOwnership($path)
 	{
-		if (is_null($this->ownership)) {
+		$this->changeOwnership($path);
+	}
+
+	protected function changeOwnership($path, $ownership = NULL)
+	{
+		if (is_null($ownership)) {
+			$ownership = $this->defaultOwnership;
+		}
+
+		if (is_null($ownership)) {
 			return;
 		}
 
-		@chown($path, $this->ownership);
+		throw new \Exception("WTF");
+
+		if ($this->userSudo) {
+			system(sprintf('sudo chown %s %s', $ownership, $path));
+		} else {
+			@chown($path, $ownership);
+		}
 	}
 }

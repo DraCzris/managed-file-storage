@@ -15,6 +15,7 @@ class Extension extends Nette\DI\CompilerExtension
     /** @var array */
     private $defaults = array(
         'ownership' => 'www-data:www-data',
+        'useSudo' => false
     );
 
 
@@ -27,19 +28,19 @@ class Extension extends Nette\DI\CompilerExtension
         $builder->addDefinition('filePermissionsManager')
             ->setClass(
                 'ManagedFileStorage\FilePermissionsManager',
-                array($config['ownership'])
+                array($config['ownership'], $config['userSudo'])
             );
 
         $builder->addDefinition('managedFileJournal')
             ->setClass(
                 'ManagedFileStorage\ManagedFileJournal',
                 array($builder->expand('%tempDir%'), "@filePermissionsManager")
-            );
+            )->setAutowired(FALSE);
 
         $builder->addDefinition('managedFileStorage')
             ->setClass(
                 'ManagedFileStorage\ManagedFileStorage',
-                array($builder->expand('%tempDir%/cache'), "@filePermissionsManager")
+                array($builder->expand('%tempDir%/cache'), "@filePermissionsManager", "@managedFileJournal")
             );
     }
 }

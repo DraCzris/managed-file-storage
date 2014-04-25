@@ -9,7 +9,8 @@ namespace ManagedFileStorage;
 
 use Nette,
 	Nette\Caching\Cache,
-	Nette\Caching\Storages\FileJournal;
+	Nette\Caching\Storages\FileJournal,
+	Nette\Caching\Storages\IJournal;
 
 
 /**
@@ -737,7 +738,7 @@ class ManagedFileJournal extends Nette\Object implements IJournal
 	 */
 	protected function findIndexNode($type, $search, $childId = NULL, $prevId = NULL)
 	{
-		$nodeId = FileJournal::$startNode[$type];
+		$nodeId = self::$startNode[$type];
 
 		$parentId = -1;
 		while (TRUE) {
@@ -834,7 +835,7 @@ class ManagedFileJournal extends Nette\Object implements IJournal
 			}
 		}
 
-		$id = FileJournal::$startNode[FileJournal::DATA];
+		$id = self::$startNode[FileJournal::DATA];
 		while (TRUE) {
 			if (isset($this->dataNodeFreeSpace[$id]) || isset($this->nodeCache[$id])) {
 				++$id;

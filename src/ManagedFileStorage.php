@@ -9,7 +9,8 @@ namespace ManagedFileStorage;
 use Nette,
 	Nette\Caching,
 	Nette\Caching\Cache,
-	Nette\Caching\Storages\FileStorage;
+	Nette\Caching\Storages\FileStorage,
+	Nette\Caching\Storages\IJournal;
 
 /**
  * Cache file storage with customizable owner and group
