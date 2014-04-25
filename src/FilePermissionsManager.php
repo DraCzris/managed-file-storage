@@ -36,8 +36,6 @@ class FilePermissionsManager extends Nette\Object
 			return;
 		}
 
-		throw new \Exception("WTF");
-
 		if ($this->userSudo) {
 			system(sprintf('sudo chown %s %s', $ownership, $path));
 		} else {
