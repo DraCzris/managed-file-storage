@@ -24,13 +24,24 @@ class Extension extends Nette\DI\CompilerExtension
 
         $builder = $this->getContainerBuilder();
 
-        $builder->getDefinition('cacheStorage') // no namespace for back compatibility
+        $builder->addDefinition('filePermissionsManager')
+            ->setClass(
+                'ManagedFileStorage\FilePermissionsManager',
+                array($config['ownership'])
+            );
+
+        $builder->addDefinition('managedFileJournal')
+            ->setClass(
+                'ManagedFileStorage\ManagedFileJournal',
+                array($builder->expand('%tempDir%'), "@filePermissionsManager")
+            );
+
+        $builder->addDefinition('managedFileStorage')
             ->setClass(
                 'ManagedFileStorage\ManagedFileStorage',
-                array($container->expand('%tempDir%/cache'), '@cacheJournal', $config['ownership'])
+                array($builder->expand('%tempDir%/cache'), "@filePermissionsManager")
             );
     }
-
 }
 
 
