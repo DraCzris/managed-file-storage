@@ -13,12 +13,12 @@ class FilePermissionsManager extends Nette\Object
 {
 	protected $defaultOwnership;
 
-	protected $userSudo;
+	protected $useSudo;
 
 	public function __construct($defaultOwnership, $useSudo)
 	{
 		$this->defaultOwnership = $defaultOwnership;
-		$this->sudo = $sudo;
+		$this->useSudo = $useSudo;
 	}
 
 	public function fixOwnership($path)
@@ -37,7 +37,7 @@ class FilePermissionsManager extends Nette\Object
 		}
 
 		if ($this->userSudo) {
-			system(sprintf('sudo chown %s %s', $ownership, $path));
+			@system(sprintf('sudo chown %s %s', $ownership, $path));
 		} else {
 			@chown($path, $ownership);
 		}
